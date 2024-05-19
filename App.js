@@ -1,11 +1,9 @@
 import { View, Text, StyleSheet, TextInput, Button, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import CommentApiCalling from './src/CommentApiCalling'
-import StoryApiCalling from './src/StoryApiCalling'
-import { BASE_URL } from "@env"
 import { useDispatch, useSelector } from 'react-redux'
 import { CommentSliceAction } from './src/redux/CommentSlice'
 import { StorySliceAction } from './src/redux/StorySlice'
+import DemoGenerator from './src/Generator Demo  Function/DemoGenerator'
 
 const App = () => {
 
@@ -13,8 +11,6 @@ const App = () => {
     comment: "",
     story: ""
   });
-  var [commentDataArr, setCommentDataArr] = useState([]);
-  var [storiesDataArr, setStoriesDataArr] = useState([]);
 
   // redux data 
   const dispatch = useDispatch();
@@ -23,39 +19,17 @@ const App = () => {
   console.log("store comment ---- ", commentStoreData)
   console.log("store story ---- ", storyStoreData)
 
-  // data fetching functions
-  function FetchCommentData() {
-    fetch(`${BASE_URL}/comments`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    }).then((res) => {
-      res.json().then(
-        (data) => {
-          dispatch(CommentSliceAction.addToCommentReducerArray(data))
-        })
-    })
-      .catch((err) => console.log(err))
-  }
-  function FetchStoriesData() {
-    fetch(`${BASE_URL}/stories`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    }).then((res) => {
-      res.json().then(
-        (data) => {
-          dispatch(StorySliceAction.addToStoryReducerArray(data))
-        })
-    })
-      .catch((err) => console.log(err))
-  }
 
+  // useEffect(()=>{
+  //   DemoGenerator()
+  // },[])
 
   return (
     <View style={styles.container} >
-      {console.log("DOM is updating")}
       <View style={styles.innerContainer}>
         <View style={{ gap: 20, }}>
           <View>
+            {console.log("-----------DOM REDNDERD--------")}
             <TextInput
               style={styles.mainTextInput}
               placeholder='Enter your comment'
@@ -63,12 +37,12 @@ const App = () => {
               onChangeText={(text) => setFeilds({ ...feilds, comment: text })}
             />
             <Button
-              onPress={() => CommentApiCalling(feilds.comment)}
+              onPress={() => dispatch(CommentSliceAction.postNewCommentData(feilds.comment))}
               style={styles.mainButton}
               title='Press to Submit Comment' />
             <Button
               style={styles.mainButton}
-              onPress={() => FetchCommentData()}
+              onPress={() => dispatch(CommentSliceAction.fetchCommentData())}
               title='Fetch story' />
           </View>
 
@@ -81,11 +55,11 @@ const App = () => {
             />
             <Button
               style={styles.mainButton}
-              onPress={() => StoryApiCalling(feilds.story)}
+              onPress={() => dispatch(StorySliceAction.postNewStoryData(feilds.story))}
               title='Press to Submit story' />
             <Button
               style={styles.mainButton}
-              onPress={() => FetchStoriesData()}
+              onPress={() => dispatch(StorySliceAction.fetchStoryData())}
               title='Fetch story' />
           </View>
         </View>

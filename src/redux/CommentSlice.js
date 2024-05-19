@@ -6,6 +6,12 @@ const CommentSlice = createSlice({
         data:[]
     },
     reducers:{
+        fetchCommentData:(state,action)=>{
+            console.log("Fetching Comment Data ---****")
+        },
+        postNewCommentData:()=>{
+            console.log("POST - Comment")
+        },
         addToCommentReducerArray:(state,action)=>{
             state.data = action.payload;
         },

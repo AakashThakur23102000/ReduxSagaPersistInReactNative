@@ -6,6 +6,12 @@ const StorySlice = createSlice({
         data:[]
     },
     reducers:{
+        fetchStoryData:()=>{
+            console.log("---fetching stories data--")
+        },
+        postNewStoryData:()=>{
+            console.log("POST - Story")
+        },
         addToStoryReducerArray:(state,action)=>{
             state.data = action.payload;
         },
