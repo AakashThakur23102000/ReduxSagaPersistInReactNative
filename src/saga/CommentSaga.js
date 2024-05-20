@@ -48,4 +48,6 @@ function* CommentSaga() {
     yield takeEvery(CommentSliceAction.postNewCommentData, commentDataPOST)
 }
 
+// for avoiding api spam we can use throttle, with time, instead of takeEvery
+// take latest is used when api takes more time and user click multiple time then last click will be considered
 export default CommentSaga;
