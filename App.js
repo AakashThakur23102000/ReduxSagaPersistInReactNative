@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { CommentSliceAction } from './src/redux/CommentSlice'
 import { StorySliceAction } from './src/redux/StorySlice'
 import DemoGenerator from './src/Generator Demo  Function/DemoGenerator'
+import { horizontalScale, verticalScale, scaleFontSize } from "./src/ResponsiveScaling/CustomResponsiveScaling"
 
 const App = () => {
 
@@ -93,16 +94,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 15,
-    paddingTop: 25
+    paddingTop: verticalScale(25)
   },
   innerContainer: {
     flex: 1,
   },
   mainTextInput: {
-    height: 30,
-    borderRadius: 5,
+    height: verticalScale(30),
+    borderRadius: horizontalScale(5),
     padding: 0,
-    paddingHorizontal: 10,
+    paddingHorizontal: horizontalScale(10),
     backgroundColor: "grey",
     width: "80%",
     alignSelf: "center"
