@@ -5,9 +5,13 @@ import { CommentSliceAction } from './src/redux/CommentSlice'
 import { StorySliceAction } from './src/redux/StorySlice'
 import DemoGenerator from './src/Generator Demo  Function/DemoGenerator'
 import { horizontalScale, verticalScale, scaleFontSize } from "./src/ResponsiveScaling/CustomResponsiveScaling"
+import useBubbleSortOptimized from './src/UsefulHooks/useBubbleSortOptimized'
 
 const App = () => {
-
+  var array = ["a","bd","asa","dwdw"];
+  console.log(array)
+  array = useBubbleSortOptimized(array);
+  console.log("new -", array);
   var [feilds, setFeilds] = useState({
     comment: "",
     story: ""
